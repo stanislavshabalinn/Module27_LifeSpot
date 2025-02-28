@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -32,6 +32,14 @@ namespace LifeSpot
                     var viewPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "index.html");
                     var html = await File.ReadAllTextAsync(viewPath);
                     await context.Response.WriteAsync(html);
+                });
+
+                endpoints.MapGet("/Static/CSS/index.css", async context =>
+                {
+                    // ïî àíàëîãèè ñî ñòðàíèöåé Index íàñòðîèì íà íàøåì ñåðâåðå ïóòü äî ñòðàíèöû ñî ñòèëÿìè, ÷òîáû áðàóçåð çíàë, îòêóäà èõ çàãðóæàòü
+                    var cssPath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "CSS", "index.css");
+                    var css = await File.ReadAllTextAsync(cssPath);
+                    await context.Response.WriteAsync(css);
                 });
             });
         }
